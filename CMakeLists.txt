@@ -24,16 +24,13 @@ set_target_properties(${COMPONENT_NAME} PROPERTIES CXX_STANDARD 17)
 # Add an alias to tell future "target_link_libraries()" calls this is a target, and never a linker flag
 add_library(${PROJECT_NAMESPACE}::${COMPONENT_NAME} ALIAS ${COMPONENT_NAME})
 
-# Note: This variable is used in the Config.cmake.in file
-set(TARGETS_EXPORT_NAME "${COMPONENT_NAME}Targets")
+# Set our local install directory
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/../install/" CACHE PATH "Location of the 'install' directory." FORCE)
+endif()
 
-# Export Targets
-install(EXPORT "${TARGETS_EXPORT_NAME}" NAMESPACE "${PROJECT_NAMESPACE}::" DESTINATION "${CMAKE_INSTALL_DIR}")
-
-# Install targets associated with the ${COMPONENT_NAME} (binaries, static libraries and/or shared libraries)
-install(
-    TARGETS ${COMPONENT_NAME}
-    EXPORT "${TARGETS_EXPORT_NAME}"
+# Install the targets associated with the ${PROJECT_NAME} (binaries, static libraries and/or shared libraries)
+install(TARGETS ${COMPONENT_NAME} EXPORT ${COMPONENT_NAME}_targets
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
