@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(test_app)
 
-add_executable(${PROJECT_NAME} SHARED
+add_executable(${PROJECT_NAME}
     src/main.cpp
 )
 
