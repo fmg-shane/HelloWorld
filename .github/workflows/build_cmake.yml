@@ -23,19 +23,9 @@ jobs:
             environment_script: "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           }
         - {
-            name: "Windows Latest MinGW", artifact: "Windows-MinGW.7z",
-            os: windows-latest,
-            cc: "gcc", cxx: "g++"
-          }
-        - {
             name: "Ubuntu Latest GCC", artifact: "Linux.7z",
             os: ubuntu-latest,
             cc: "gcc", cxx: "g++"
-          }
-        - {
-            name: "macOS Latest Clang", artifact: "macOS.7z",
-            os: macos-latest,
-            cc: "clang", cxx: "clang++"
           }
 
     steps:
@@ -57,10 +47,6 @@ jobs:
           set(ninja_suffix "linux.zip")
           set(cmake_suffix "linux-x86_64.tar.gz")
           set(cmake_dir "cmake-${cmake_version}-linux-x86_64/bin")
-        elseif ("${{ runner.os }}" STREQUAL "macOS")
-          set(ninja_suffix "mac.zip")
-          set(cmake_suffix "macos-universal.tar.gz")
-          set(cmake_dir "cmake-${cmake_version}-macos-universal/CMake.app/Contents/bin")
         endif()
 
         set(ninja_url "https://github.com/ninja-build/ninja/releases/download/v${ninja_version}/ninja-${ninja_suffix}")
@@ -277,15 +263,7 @@ jobs:
             os: ubuntu-latest
           }
         - {
-            name: "Windows Latest MinGW", artifact: "Windows-MinGW.7z",
-            os: ubuntu-latest
-          }
-        - {
             name: "Ubuntu Latest GCC", artifact: "Linux.7z",
-            os: ubuntu-latest
-          }
-        - {
-            name: "macOS Latest Clang", artifact: "macOS.7z",
             os: ubuntu-latest
           }
     needs: release
