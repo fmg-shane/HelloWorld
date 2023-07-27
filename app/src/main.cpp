@@ -1,6 +1,6 @@
-#include <iostream>
+#include <interface.hpp>
 
 int main()
 {
-  std::cout << "Hello world\n";
+  test::lib::printTest();
 }
