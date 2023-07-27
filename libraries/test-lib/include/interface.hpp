@@ -3,6 +3,6 @@
 
 namespace test::lib
 {
-    inline void printTest();
+    void printTest();
 };
 #endif
